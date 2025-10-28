@@ -545,7 +545,7 @@ class TimeDataset(Dataset):
                 else:
                     contains_nan = torch.cat([torch.ones(n_lags - 1, dtype=torch.bool), torch.tensor(contains_nan)])
                 # there are n_forecasts origin_indexes missing at end
-                contains_nan = torch.cat([contains_nan.clone().detach(), torch.ones(n_forecasts, dtype=torch.bool)])
+                contains_nan = torch.cat([torch.tensor(contains_nan), torch.ones(n_forecasts, dtype=torch.bool)])
         valid_origins = ~contains_nan
         return valid_origins
 
